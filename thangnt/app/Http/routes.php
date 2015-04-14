@@ -24,6 +24,8 @@ get(DETAIL_EMPLOYEE_FULL_PATH, array('as' => 'user.detail', 'uses'	=>	'User\User
 // edit user
 get(EDIT_USER_FULL_PATH, array('as'	=> 'user.edit', 'uses'	=>	'User\UserController@edit'));
 
+
+// get(BACK_TO_PREVIOUS_PAGE, array('as' => 'redirect.back', 'uses' => 'User\UserController@backToPreviousPage'));
 // 
 // get('logout-success', array('as'	=>	'logout-success', 'uses'	=>	'User\UserController@logout'));
 

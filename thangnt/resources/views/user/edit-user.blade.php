@@ -9,7 +9,7 @@
 	<h2>編集</h2>
 
 	<section>
-		<form class="pure-form pure-u-3-4">
+		<form class="pure-form pure-u-3-4" >
 		<table class="pure-table pure-table-bordered" width="100%">
 			<tbody>
 				<tr>
@@ -45,9 +45,15 @@
 				<tr>
 					<td colspan="2" align="right">
 						<!-- Back -->
-						<a class="pure-button pure-button-primary" href="">戻る</a>
+						@if(!$_SERVER['HTTP_REFERER'] == '')
+							<a class="pure-button pure-button-primary" href="{!! $_SERVER['HTTP_REFERER'] !!}">戻る</a>
+						@endif
+
 						<!-- Confirm Submit -->
-						<button class="pure-button button-error" name="submit" type="submit">確認</button>
+						@if(\Auth::user()->role_id != ROLE_EMPLOYEE)
+							<button class="pure-button button-error" name="submit" type="submit">確認</button>
+						@endif
+						
 					</td>
 				</tr>
 			</tbody>

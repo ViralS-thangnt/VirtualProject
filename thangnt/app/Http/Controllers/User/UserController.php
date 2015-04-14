@@ -4,7 +4,6 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-// use App\Lib\Prototype\Interfaces\UserInterface;
 use App\Lib\Prototype\Interfaces\UserInterface;
 
 use Illuminate\Http\Request;
@@ -32,14 +31,14 @@ class UserController extends Controller {
 	 */
 	public function index()
 	{
-		$data = User::orderBy('id')
-					->paginate(10)
-					;
+		// $data = User::orderBy('id')
+		// 			->paginate(10)
+		// 			;
 
 		// {!! $data->render() !!}
 		// dd($data);
 
-		return view('user.list-user')->withData($data);
+		return view('user.list-user')->withData($this->repo->getDataListUser());
 
 	}
 
@@ -59,29 +58,8 @@ class UserController extends Controller {
 
 	public function topPage()
 	{
-		$user = $this->user;
 
-		switch ($user->role_id) {
-			case ROLE_BOSS:
-			case ROLE_ADMIN:
-
-				return redirect()->to(LIST_USER_PATH);
-
-				break;
-			case ROLE_EMPLOYEE:
-
-				return redirect()->to(DETAIL_EMPLOYEE_PATH . $user->id . '/detail' );
-
-				break;
-
-			default:
-				// return redirect()->to();
-				// $redirectTo = $this->redirectPath(DETAIL_EMPLOYEE_PATH . $user->id . '/detail');
-				abort(404);
-				break;
-		}
-
-
+		return redirect()->to($this->repo->pathRedirectTopPage());
 	}
 
 
@@ -95,7 +73,7 @@ class UserController extends Controller {
 	{
 		// dd('This is edit page');
 		// dd($id);
-		
+
 		return view('user.edit-user')->withData(User::find($id));
 
 	}
@@ -111,6 +89,13 @@ class UserController extends Controller {
 		//
 	}
 
+	// public function backToPreviousPage()
+	// {
+	// 	// return redirect()->back();
+	// 	// header("Location:javascript://history.go(-1)");
+	// 	// header('Location: ' . $_SERVER['HTTP_REFERER']);
 
+	// 	return ;
+	// }
 
 }

@@ -57,7 +57,11 @@
 					<td colspan="2" align="right">
 						<a class="pure-button button-secondary" href="{!! url(DETAIL_EMPLOYEE_PATH . $data['id'] . '/edit') !!}">編集</a>
 					</td>
+					
+
 					@endif
+
+
 				</tr>
 			</tbody>
 		</table>

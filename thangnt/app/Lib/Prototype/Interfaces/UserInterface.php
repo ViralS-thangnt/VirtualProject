@@ -6,4 +6,6 @@ use App\Lib\Prototype\Interfaces\BaseIntreface;
 interface UserInterface extends BaseInterface
 {
     public function getUserByIdAndRole($id, $role_id);
+    public function pathRedirectTopPage();
+    public function getDataListUser();
 }
