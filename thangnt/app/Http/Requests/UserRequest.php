@@ -14,7 +14,8 @@ class UserRequest extends Request {
 	{
 		// Alert !! Not authen
 		// Require change to false value
-		return true;
+		
+		return false;
 	}
 
 	/**

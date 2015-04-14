@@ -21,6 +21,7 @@ class RedirectIfAuthenticated {
 	 */
 	public function __construct(Guard $auth)
 	{
+		
 		$this->auth = $auth;
 	}
 
@@ -35,7 +36,9 @@ class RedirectIfAuthenticated {
 	{
 		if ($this->auth->check())
 		{
-			return new RedirectResponse(url('/home'));
+			
+			return new RedirectResponse(url(LIST_USER_PATH));
+			// return new RedirectResponse(url('auth/login'));
 		}
 
 		return $next($request);

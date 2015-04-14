@@ -11,23 +11,25 @@
 |
 */
 
-// Route::get('/', 'WelcomeController@index');
+// get(LOGIN_PATH)
+// top page
+get(TOP_PAGE, array('as' =>	'top',	'uses'	=>	'User\UserController@topPage'));
 
-// Route::get('home', 'HomeController@index');
+// list users
+get(LIST_USER_PATH, array('as' => 'user.list', 'uses'	=>	'User\UserController@index'));
 
-// login user
-get('login', 'user\UserController@getLogin');
+// detail user
+get(DETAIL_EMPLOYEE_FULL_PATH, array('as' => 'user.detail', 'uses'	=>	'User\UserController@detail'));
 
-// post('login', ['as'	=> 'user.login', 'uses'	=> 'User\UserController@postLogin']);
+// edit user
+get(EDIT_USER_FULL_PATH, array('as'	=> 'user.edit', 'uses'	=>	'User\UserController@edit'));
 
+// 
+// get('logout-success', array('as'	=>	'logout-success', 'uses'	=>	'User\UserController@logout'));
 
-// Route::controllers([
-// 	'auth' => 'Auth\AuthController',
-// 	'password' => 'Auth\PasswordController',
-// ]);
 
 Route::controllers([
-	'auth' => '\App\Http\Controllers\Auth\AuthController',
-	'password' => '\App\Http\Controllers\Auth\PasswordController',
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
 ]);
 
