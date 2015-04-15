@@ -11,6 +11,7 @@
 @stop
 
 @section('content')
+@if(isset($allow_access) and $allow_access)
 
 <section>
 		<table class="pure-table pure-table-bordered">
@@ -40,7 +41,7 @@
 			<tbody>
 				@foreach($data as $value)
 				<tr class="pure-table-odd">
-					<td>21</td>
+					<td>{!! $value['id'] !!}</td>
 					<td><a href="{!! url(DETAIL_EMPLOYEE_PATH . $value['id'] . '/detail') !!}">{!! $value['name'] !!}</a></td>
 					<td>{!! $value['email'] !!}</td>
 					<td>{!! $value['phone'] !!}</td>
@@ -54,7 +55,9 @@
 
 	</section>
 
-
+@else
+	Access Denied
+@endif
 
 	
 		

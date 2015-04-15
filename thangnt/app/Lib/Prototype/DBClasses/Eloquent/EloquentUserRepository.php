@@ -26,22 +26,85 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
         return $data;
     }
 
-    public function getUserByIdAndRole($id, $role_id, $enable = ENABLE)
+    public function getUserById($id, $enable = ENABLE)
     {
-        $user = User::where('id', $id);
-
-        if($enable != ALL_ENABLE)
-            
-            $user->where('enable', $enable);
-
-        if($user)
-        {
-            return $user->first();
-        }
+        $user = $this->model->where('id', $id);
         
-        return null;
+        if($enable != ALL_ENABLE and $user != null)
+        {
+            $user = $user->where('enable', $enable);
+        }
 
-        // return User::find($id)->where('enable', ENABLE)->get();
+        $user = $user->first();
+
+        return $user;
+    }
+
+    public function getBosses()
+    {
+        $bosses = $this->model->where('role_id', ROLE_BOSS);
+        if($bosses)
+
+            return $bosses->get();
+
+        return null;
+    }
+
+    public function getBossKanaNameById($id)
+    {
+        if($id == -1)
+
+            return NULL_SYMBOL;
+
+        $boss = $this->model->where('role_id', ROLE_BOSS)
+                            ->where('id', $id);
+        if($boss)
+        {   
+            return $boss->first()->kana;
+        }
+
+        return NULL_SYMBOL;
+    }
+
+    public function getBossNameByUserId($id)
+    {
+        // $user = $this->model->find($id);
+
+        // if($user and $user->boss_id) 
+        // {
+
+        // }
+
+        // return '';
+    }
+
+    public function getBossNameByBossId($boss_id)
+    {   
+        $boss = $this->model->find($boss_id);
+        if($boss)
+
+            return $boss->name;
+
+        return NULL_SYMBOL;
+    }
+
+    public function getCommentByUserId($user_id)
+    {
+        $user = $this->model->find($user_id);
+        if($user and $user->boss_id == $this->user->id)
+        {
+            return $user->note;
+        }
+
+        return NULL_SYMBOL;
+    }
+
+    public function saveUserById($user_id, $input)
+    {
+        $user = $this->model->find($user_id);
+        $user->fill($input);
+
+        $user->save();
     }
 
     public function pathRedirectTopPage()
@@ -67,6 +130,41 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
         }
 
         return $path;
+    }
+
+    public function checkAccessDenied($current_form)
+    {
+        $role_id = $this->user->role_id;
+
+        switch ($current_form) {
+            case FORM_LIST_USER:
+                $allow_access = ($role_id == ROLE_EMPLOYEE) ? DENIED_ACCESS : ALLOW_ACCESS;
+                break;
+            
+            default:
+                $allow_access = DENIED_ACCESS;
+                break;
+        }
+
+        return $allow_access;
+    }
+
+    public function deleteUserById($id)
+    {
+        // dd('delete id : ' . $id);
+        $this->model->find($id)->delete();
+    }
+
+    public function insertUser($input)
+    {
+        // dump($input);
+        if(isset($input['password']))
+            $input['password'] = bcrypt($input['password']);
+
+        $this->model = new User;
+        $this->model->fill($input);
+        // dd($this->model);
+        $this->model->save();
     }
 
 }
