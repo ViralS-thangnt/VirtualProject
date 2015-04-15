@@ -2,7 +2,9 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
+// use App\Http\Requests\UserRequest;
+use App\Http\Requests\AddRequest;
+
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Lib\Prototype\Interfaces\UserInterface;
 
@@ -11,8 +13,6 @@ use Input;
 use Session;
 use App\User;
 use DB;
-
-
 
 class UserController extends Controller {
 
@@ -23,7 +23,6 @@ class UserController extends Controller {
 		$this->repo = $repo;
 		$this->user = \Auth::user();
 	}
-
 
 	/**
 	 * Display a listing of the resource.
@@ -61,7 +60,7 @@ class UserController extends Controller {
 		return view('user.add')->withBosses($bosses);
 	}
 
-	public function addConfirm()
+	public function addConfirm(AddRequest $request)
 	{
 
 		$boss_name = $this->repo->getBossKanaNameById(current(Input::get('boss_id')));

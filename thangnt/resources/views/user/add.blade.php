@@ -2,6 +2,8 @@
 
 @section('header-items')
 
+
+
 	<!-- <nav class="home-menu pure-menu pure-menu-horizontal relative"> -->
 		<!-- <h1 class="pure-menu-heading"><a href="">社員管理システム</a></h1> -->
 		<!-- <ul class="pure-menu-list force-right"> -->
@@ -27,7 +29,7 @@
 @stop
 
 @section('content')
-
+@include('layout.error')
 <section class="contents">
 	<!-- <h2>追加</h2> -->
 	<h2>Thêm mới </h2>
@@ -55,12 +57,19 @@
 				</tr>
 				<tr>
 					<th>Email メールアドレス</th>
-					
 					<td><input type="text" name="email" value="{{ old('email') }}" class="pure-input-1"></td>
-
 					<!-- <th>メールアドレス</th>
 					<td>aoki@example.com</td> -->
 				</tr>
+
+				<tr>
+					<th>Confirm Email メールアドレス（確認）</th>
+					<td><input type="text" name="email_confirmation" value="{{ old('email_confirmation') }}" class="pure-input-1"></td>
+					<!-- <th>メールアドレス（確認）</th>
+					<td>aoki@example.com</td> -->
+				</tr>
+				
+
 				<tr>
 					<!-- <th>電話番号</th>
 					<td>090-0123-4567</td> -->

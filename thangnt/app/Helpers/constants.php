@@ -52,7 +52,28 @@ define('FORM_EDIT_USER', 2);
 define('ALLOW_ACCESS', 1);
 define('DENIED_ACCESS', 0);
 
-// 
+// null
 define('NULL_SYMBOL', '-');
+
+// define message
+// define('MESSAGE_REQUIRE', 'が入力されていません。');
+// define('MESSAGE_MAX_16', 'は16文字まで入力できます。');
+// define('MESSAGE_MAX_32', 'は32文字まで入力できます。');
+// define('MESSAGE_EMPTY', 'を入力してください。');
+
+define('MESSAGE_REQUIRE', '$control_name が入力されていません。Ban can phai nhap $control_name');
+
+// '名前 は16文字まで入力できます。Name co Do dai toi da 16 ky tu',
+define('MESSAGE_MAX', '$control_name は $num 文字まで入力できます。Name co Do dai toi da 16 ky tu');
+define('MESSAGE_MIN', 'は $num 文字まで入力できます。');
+define('MESSAGE_EMPTY', 'を入力してください。');
+
+
+// には有効なメールアドレスを入力してください。
+define('MESSAGE_EMAIL', 'には有効なメールアドレスを入力してください。');
+define('MESSAGE_DUPLICATE', 'は既に使用されています。');
+define('NULL_SYMBOL', 'メールアドレスと{ja_name}が異なっています。');
+define('NULL_SYMBOL', '-');
+
 
 

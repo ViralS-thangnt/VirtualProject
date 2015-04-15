@@ -19,7 +19,8 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
 
     public function getDataListUser()
     {
-        $data = User::orderBy('updated_at', 'desc')
+        $data = $this->model->whereEnable(ENABLE)
+                    ->orderBy('updated_at', 'desc')
                     ->paginate(10)
                     ;
 
@@ -152,7 +153,15 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
     public function deleteUserById($id)
     {
         // dd('delete id : ' . $id);
-        $this->model->find($id)->delete();
+        // soft delete
+        $user = $this->model->find($id);
+
+        if($user)
+        {
+            $user->enable = DISABLE;
+            $user->save();
+        }
+        
     }
 
     public function insertUser($input)

@@ -47,7 +47,7 @@
 
 					<!-- <td>電話番号</td> -->					
 					<td>Phone</td>
-					<td><input type="text" name="telephone_no" value=""></td>
+					<td><input type="text" name="phone" value=""></td>
 				</tr>
 				<tr>
 					<!-- <td>生年月日</td> -->					

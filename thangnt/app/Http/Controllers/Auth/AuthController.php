@@ -6,7 +6,8 @@ use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
+// use App\Http\Requests\UserRequest;
+use App\Http\Requests\LoginRequest;
 use Input;
 use DB;
 use App\User;
@@ -79,7 +80,6 @@ class AuthController extends Controller {
 	 */
 	public function getLogin()
 	{
-		
 
 		return view('auth.login');
 	}
@@ -90,7 +90,7 @@ class AuthController extends Controller {
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function postLogin(Request $request)
+	public function postLogin(LoginRequest $request)
 	{
 		$this->validate($request, [
 			'email' => 'required', 'password' => 'required|min:8|max:32'

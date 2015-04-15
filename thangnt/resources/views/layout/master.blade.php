@@ -12,7 +12,7 @@
 	
 	@include('layout.header')
 
-	@include('layout.error')
+	
 
 	@yield('content')
 

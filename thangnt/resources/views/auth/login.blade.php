@@ -13,7 +13,7 @@
 @stop
 
 @section('content')
-
+@include('layout.error')
 <div width="700px">
 <h2>ログイン</h2>
 	<section>
