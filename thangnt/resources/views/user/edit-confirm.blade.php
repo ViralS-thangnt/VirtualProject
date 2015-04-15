@@ -69,8 +69,8 @@
 					<!-- <th>電話番号</th>
 					<td>090-0123-4567</td> -->
 					<th>Phone 電話番号</th>
-					<td>{!! $telephone_no !!}</td>
-					<input type="hidden" name="phone" value="{!! $telephone_no !!}"/>
+					<td>{!! $phone !!}</td>
+					<input type="hidden" name="phone" value="{!! $phone !!}"/>
 				</tr>
 				<tr>
 					<th>Ngay sinh</th>
@@ -116,9 +116,9 @@
 
 						<a class="pure-button pure-button-primary" href="{!! $referer !!}">Quay lại 戻る</a>
 						<!-- Confirm Submit -->
-						@if(\Auth::user()->role_id != ROLE_EMPLOYEE)
+
 							<button class="pure-button button-error" name="submit" type="submit">Cập nhật 更新</button>
-						@endif
+
 					</td>
 				</tr>
 			</tbody>

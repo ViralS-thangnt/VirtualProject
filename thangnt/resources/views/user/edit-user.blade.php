@@ -67,11 +67,10 @@
 						<!-- <a class="pure-button pure-button-primary" href="{!! $referer !!}">戻る</a> -->
 
 						<!-- Confirm Submit -->
-						@if(\Auth::user()->role_id != ROLE_EMPLOYEE)
+						
 							<button class="pure-button button-error" name="submit" type="submit">Submit</button>
 							<!-- <button class="pure-button button-error" name="submit" type="submit">確認</button> -->
 
-						@endif
 						
 					</td>
 				</tr>
