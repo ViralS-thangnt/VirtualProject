@@ -21,6 +21,7 @@ class DetailRequest extends Request {
 	 */
 	public function rules()
 	{
+		// dd('fds');
 		$start_date = '1970-01-01';
 		$end_date = time() - 10*365*24*3600;	// before 10 year
 		$end_date = date('Y', $end_date) . '-01-01';
@@ -32,6 +33,7 @@ class DetailRequest extends Request {
 			'email_confirmation'	=>	'required|email',
 			'phone'			=>	array('required', 'regex:/0(?:\d\-\d{4}|\d{2}\-\d{3}|\d{3}\-\d{2}|\d{4}\-\d{1})\-\d{4}$/'),	//[{0-9\-]*
 
+			// date_format:format
 			'birthday'		=>	'required|after:' . $start_date . '|before:' . $end_date,
 			'note'			=>	'required|max:300',
 			'password'		=>	'required|min:8|max:32',

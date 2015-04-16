@@ -210,6 +210,8 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
         if(isset($input['employee']))
             $result = $result->querySearchEmployee();
 
+        
+
         // $result = $result->orderBy('updated_at', 'desc');
         // $result->paginate(PAGINATE_NUMBER);
 
