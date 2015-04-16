@@ -2,8 +2,9 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-// use App\Http\Requests\UserRequest;
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\AddRequest;
+use App\Http\Requests\DetailRequest;
 
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Lib\Prototype\Interfaces\UserInterface;
@@ -72,7 +73,7 @@ class UserController extends Controller {
 
 	public function insert()
 	{
-		dump(Input::all());
+		// dump(Input::all());
 
 		$this->repo->insertUser(Input::except('_token', '_method'));
 
@@ -85,7 +86,7 @@ class UserController extends Controller {
 		return redirect()->to($this->repo->pathRedirectTopPage());
 	}
 
-	public function confirmEdit($id)
+	public function confirmEdit(DetailRequest $request, $id)
 	{
 
 		return view('user.edit-confirm')->with(Input::all())
@@ -102,8 +103,10 @@ class UserController extends Controller {
 	 */
 	public function edit($id)
 	{
+		$bosses = $this->repo->getBosses();
 
-		return view('user.edit-user')->withData(User::find($id));
+		return view('user.edit-user')->withData(User::find($id))
+									->withBosses($bosses);
 	}
 
 	/**
@@ -136,5 +139,21 @@ class UserController extends Controller {
 		return view('user.delete-complete')->withId($id);
 	}
 
+	public function search(SearchRequest $request)
+	{
+		// dump(Input::all());
+		// dd($search_query);
+		$result = $this->repo->seachUserByQuery(Input::all());
+		// dd($result);
+		// dd('fjdkls');
+		// Input::flash();
+		return view('user.search-user')->withData($result);
+	}
+
+	// public function logoutSuccess()
+	// {
+
+	// 	return view('user.logout-success');
+	// }
 
 }

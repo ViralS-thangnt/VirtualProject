@@ -6,8 +6,6 @@ use App\Lib\Prototype\BaseClasses\AbstractEloquentRepository;
 
 use App\User;
 use Session;
-// use Constant;
-
 
 class EloquentUserRepository extends AbstractEloquentRepository implements UserInterface
 {
@@ -20,9 +18,12 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
     public function getDataListUser()
     {
         $data = $this->model->whereEnable(ENABLE)
-                    ->orderBy('updated_at', 'desc')
-                    ->paginate(10)
+                    ->orderBy('updated_at', 'desc')     // Builder
+                    ->paginate(PAGINATE_NUMBER)
                     ;
+                    // dd($data->get());
+
+        $data->setPath('');
 
         return $data;
     }
@@ -176,4 +177,53 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
         $this->model->save();
     }
 
+    public function seachUserByQuery($input)
+    {
+        // dump($input);
+        // $result = User::;
+        // $result = User::querySearchName($input['name']);
+        $result = User::where('enable', ENABLE)->orderBy('updated_at', 'desc');
+
+        if(isset($input['name']))
+            $result = $result->querySearchName($input['name']);
+
+        if(isset($input['kana']))
+            $result = $result->querySearchKana($input['kana']);
+
+        if(isset($input['phone']))
+            $result = $result->querySearchPhone($input['phone']);
+
+        if(isset($input['start']) and !empty($input['start']))
+            $result = $result->querySearchDate($input['start'], $input['end']);
+
+        if(isset($input['email']))
+            $result = $result->querySearchEmail($input['email']);
+
+        
+// dd($result->get());
+        if(isset($input['boss']))
+            $result = $result->querySearchBoss();
+
+        if(isset($input['admin']))
+            $result = $result->querySearchAdmin();
+
+        if(isset($input['employee']))
+            $result = $result->querySearchEmployee();
+
+        // $result = $result->orderBy('updated_at', 'desc');
+        // $result->paginate(PAGINATE_NUMBER);
+
+        // dd($result->get());
+        // $result = $result->orderBy('updated_at', 'desc');
+        // dd($result->get());
+        // dd($result->get());
+        // // $result->paginate(PAGINATE_NUMBER);
+        // // dd($result->get()->paginate(PAGINATE_NUMBER));
+        // $result->paginate(PAGINATE_NUMBER);
+        // $result->setPath('');
+
+        // dd($result);
+        //($result->get()) ? $result->get() : 
+        return $result->get();
+    }
 }

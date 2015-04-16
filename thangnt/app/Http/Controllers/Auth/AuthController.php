@@ -163,7 +163,7 @@ class AuthController extends Controller {
 
 		$this->auth->logout();
 
-		return redirect(LOGIN_PATH);
+		return view('auth.logout-success');//redirect(LOGOUT_SUCCESS);
 	}
 
 

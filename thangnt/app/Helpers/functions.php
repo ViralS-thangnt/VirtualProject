@@ -24,15 +24,26 @@ function getRoleNameByRoleId($role_id)
 function messageValidate($control_name, $message)
 {
 	// $result = str_replace('$control_name', $control_name, $message);
-	$result = str_replace('$control_name', $control_name, $message);
+	$result = str_replace('{ja_name}', $control_name, $message);
 
 	return $result;
 }
 
 function messageValidateLen($control_name, $num, $message)
 {
-	$result = str_replace('$control_name', $control_name, $message);
+	$result = str_replace('{ja_name}', $control_name, $message);
 	$result = str_replace('$num', $num, $result);
+
+	return $result;
+}
+
+function messageValidateDuplicate($control_a, $control_b, $message)
+{
+	// $result = str_replace('$control_name', $control_name, $message);
+	// $result = str_replace('$control_name', $control_name, $message);
+	// dump($control_a, $control_b, $message);
+	$result = str_replace('{ja_name_a}', $control_a, $message);
+	$result = str_replace('{ja_name_b}', $control_b, $result);
 
 	return $result;
 }
@@ -48,3 +59,47 @@ function messageValidateMulti($message, $control_name_array)
 
 	return $message;
 }
+
+function messageValidateEmpty($input, $message)
+{
+
+}
+
+function messageValidateDateTime($control_name, $start, $end, $message)
+{
+	$result = str_replace('{ja_name}', $control_name, $message);
+	$result = str_replace('{start_date}', $start, $result);
+	$result = str_replace('{end_date}', $end, $result);
+	// $result = str_replace('{ja_name_b}', $control_b, $result);
+	
+	return $result;
+
+}
+
+function checkGetValue($name, $default_value = '')
+{
+	return (isset($_GET[$name]) and !empty($_GET[$name])) ? $_GET[$name] : '';
+}
+
+function checkErrorCell($control_name, $errors)
+{
+	//error-cell
+	if($errors->has($control_name))
+	{
+		return ERROR_CLASS;
+	}
+
+	return '';
+}
+
+function checkLabelError($control_name, $errors)
+{
+	if(isset($errors) and $errors->get('email'))
+	{
+		echo '<section class="error-message">' .  current($errors->get($control_name)) . '</section>';
+	}
+}
+
+
+
+

@@ -30,7 +30,7 @@
 
 <section class="contents">
 	<!-- <h2>編集（確認）</h2> -->
-	<h2>Xác nhận Edit </h2>
+	<h2>Xác nhận Edit 編集（確認）</h2>
 
 	<section>
 		<form method="POST" action="{!! url(DETAIL_EMPLOYEE_PATH . $id . '/edit/') !!}">
@@ -117,7 +117,7 @@
 						<a class="pure-button pure-button-primary" href="{!! $referer !!}">Quay lại 戻る</a>
 						<!-- Confirm Submit -->
 
-							<button class="pure-button button-error" name="submit" type="submit">Cập nhật 更新</button>
+						<button class="pure-button button-error" name="submit" type="submit">Cập nhật 更新</button>
 
 					</td>
 				</tr>

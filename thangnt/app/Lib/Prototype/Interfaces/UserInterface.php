@@ -19,4 +19,6 @@ interface UserInterface extends BaseInterface
     public function getBossNameByBossId($boss_id);
     public function getCommentByUserId($user_id);
     public function saveUserById($user_id, $input);
+
+    public function seachUserByQuery($input);
 }

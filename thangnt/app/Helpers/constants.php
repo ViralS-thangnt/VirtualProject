@@ -31,7 +31,11 @@ define('ADD_CONFIRM_PATH', '/add/conf');
 define('ADD_COMPLETE_PATH', '/add/comp');
 
 // define search path
-define('SEARCH_PATH', '/search?{search_query}');
+define('SEARCH_PATH', '/search');
+define('SEARCH_FULL_PATH', '/search?{search_query}');
+
+// define('LOGOUT_SUCCESS', '/logout');
+
 
 // define roles
 define('ROLE_ADMIN', 0);
@@ -42,6 +46,8 @@ define('ROLE_NULL', null);
 define('ALL_ENABLE', 2);
 define('ENABLE', 1);
 define('DISABLE', 0);
+
+define('PAGINATE_NUMBER', 10);
 
 // define form code
 define('FORM_LIST_USER', 0);
@@ -54,26 +60,21 @@ define('DENIED_ACCESS', 0);
 
 // null
 define('NULL_SYMBOL', '-');
+define('ERROR_CLASS', 'error-cell');
 
-// define message
-// define('MESSAGE_REQUIRE', 'が入力されていません。');
-// define('MESSAGE_MAX_16', 'は16文字まで入力できます。');
-// define('MESSAGE_MAX_32', 'は32文字まで入力できます。');
-// define('MESSAGE_EMPTY', 'を入力してください。');
-
-define('MESSAGE_REQUIRE', '$control_name が入力されていません。Ban can phai nhap $control_name');
-
-// '名前 は16文字まで入力できます。Name co Do dai toi da 16 ky tu',
-define('MESSAGE_MAX', '$control_name は $num 文字まで入力できます。Name co Do dai toi da 16 ky tu');
-define('MESSAGE_MIN', 'は $num 文字まで入力できます。');
+define('MESSAGE_REQUIRE', '{ja_name} が入力されていません。Ban can phai nhap {ja_name}');
+define('MESSAGE_MAX', '{ja_name} は $num 文字まで入力できます。{ja_name} co Do dai toi da $num ky tu');
+define('MESSAGE_MIN', '{ja_name} は $num 文字以上  {ja_name} co Do dai toi thieu $num ky tu');
 define('MESSAGE_EMPTY', 'を入力してください。');
 
+define('MESSAGE_EMAIL', 'には有効な {ja_name} を入力してください。Email của bạn không đúng định dạng');
+define('MESSAGE_EMAIL_CONFIRMED', '{ja_name_a} と {ja_name_b} が異なっています。Xac nhan email khong chinh xac');
+define('MESSAGE_EMAIL_DUPLICATE', '{ja_name}は既に使用されています。Email bi trung ');
+define('MESSAGE_EMAIL_EMPTY', '必須入力項目 {ja_name} が入力されていません。Email da khong duoc nhap');
 
-// には有効なメールアドレスを入力してください。
-define('MESSAGE_EMAIL', 'には有効なメールアドレスを入力してください。');
+// {ja name}には有効な電話番号を入力してください。
+define('MESSAGE_PHONE_INVALID', 'には有効な {ja_name} を入力してください。So dien thoai sai dinh dang ');
 define('MESSAGE_DUPLICATE', 'は既に使用されています。');
-define('NULL_SYMBOL', 'メールアドレスと{ja_name}が異なっています。');
-define('NULL_SYMBOL', '-');
-
-
-
+define('MESSAGE_DATETIME', '{ja_name} は {start_date} から {end_date} までの範囲で入力してください。');
+define('MESSAGE_LOGIN_EMAIL', '{ja_name}またはパスワードが誤っています。');
+define('MESSAGE_LOGIN_PASSWORD', '{ja_name}またはパスワードが誤っています。');

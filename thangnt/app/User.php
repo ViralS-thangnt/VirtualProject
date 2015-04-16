@@ -35,11 +35,62 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
 
+	public function scopeQuerySearchName($query, $input)
+	{
+
+		return $query->where('name', 'like', '%' . $input . '%');
+	}
+
+	public function scopeQuerySearchKana($query, $input)
+	{
+		
+		return $query->where('kana', 'like', '%' . $input . '%');
+	}
+
+	// public function scopeQuerySearchBirthday($query, $input)
+	// {
+		
+	// 	return $query->where('birthday', 'like', '%' . $input . '%');
+	// }
+
+	public function scopeQuerySearchEmail($query, $input)
+	{
+		
+		return $query->where('email', 'like', '%' . $input . '%');
+	}
+
+	public function scopeQuerySearchPhone($query, $input)
+	{
+		
+		return $query->where('phone', 'like', '%' . $input . '%');
+	}
+
+	public function scopeQuerySearchDate($query, $start_date, $end_date)
+	{
+		$query = $query->where('birthday', '>=', $start_date)
+						->where('birthday', '<=', $end_date);
 
 
+		return $query;
+	}
 
+	public function scopeQuerySearchBoss($query)
+	{
+		
+		return $query->orWhere('role_id', ROLE_BOSS);
+	}
 
+	public function scopeQuerySearchAdmin($query)
+	{
+		
+		return $query->orWhere('role_id', ROLE_ADMIN);
+	}
 
+	public function scopeQuerySearchEmployee($query)
+	{
+		
+		return $query->orWhere('role_id', ROLE_EMPLOYEE);
+	}
 
 
 }

@@ -45,10 +45,16 @@ post(ADD_CONFIRM_PATH, array('as'	=> 'user.add.confirm', 'uses'	=>	'User\UserCon
 // add user
 post(ADD_COMPLETE_PATH, array('as'	=> 'user.add.confirm', 'uses'	=>	'User\UserController@insert'));
 
+// edit user
+get(SEARCH_PATH, array('as'	=> 'user.search', 'uses'	=>	'User\UserController@search'));
+
+
+// // edit user
+// get(LOGOUT_SUCCESS, array('as'	=> 'user.logout-success', 'uses'	=>	'User\UserController@logoutSuccess'));
+
 // get(BACK_TO_PREVIOUS_PAGE, array('as' => 'redirect.back', 'uses' => 'User\UserController@backToPreviousPage'));
 // 
 // get('logout-success', array('as'	=>	'logout-success', 'uses'	=>	'User\UserController@logout'));
-
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

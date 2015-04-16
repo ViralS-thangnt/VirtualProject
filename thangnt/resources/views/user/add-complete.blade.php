@@ -36,14 +36,14 @@
 	<section>
 		<p>
 
-			ID：<a href="{!! url(DETAIL_EMPLOYEE_PATH . $id . '/detail') !!}">{!! $id !!}</a> đã được thêm vào thành công 
+			ID：<a href="{!! url(DETAIL_EMPLOYEE_PATH . $id . '/detail') !!}">{!! $id !!}</a> đã được thêm vào thành công </br>
 			ID：<a href="{!! url(DETAIL_EMPLOYEE_PATH . $id . '/detail') !!}">{!! $id !!}</a> として追加しました。 
 
 		</p>
 		<div>
 			
 			<!-- <a class="pure-button pure-button-primary" href="">検索画面へ</a> -->
-			<a class="pure-button pure-button-primary" href="">Quay về màn hình tìm kiếm</a>
+			<a class="pure-button pure-button-primary" href="{{ url(SEARCH_PATH) }}">Quay về màn hình tìm kiếm</a>
 
 		</div>
 	</section>

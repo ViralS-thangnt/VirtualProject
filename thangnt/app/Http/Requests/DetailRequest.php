@@ -1,9 +1,8 @@
 <?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use Input;
 
-class AddRequest extends Request {
+class DetailRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -12,7 +11,7 @@ class AddRequest extends Request {
 	 */
 	public function authorize()
 	{
-		return true;//\Auth::check();//false;
+		return true;
 	}
 
 	/**
@@ -38,7 +37,6 @@ class AddRequest extends Request {
 			'password'		=>	'required|min:8|max:32',
 
 		];
-
 	}
 
 	public function messages()
@@ -77,15 +75,7 @@ class AddRequest extends Request {
 			'password.min'				=>	messageValidateLen('パスワード', '8', MESSAGE_MIN),	//'メールアドレスまたは パスワード が誤っています。 Password không thể nhỏ hơn 8 ký tự',
 			'password.max'				=>	messageValidateLen('パスワード', '32', MESSAGE_MAX),	//'メールアドレスまたは パスワード が誤っています。 Password không thể lớn hơn 32 ký tự ',
 
-
 		];
 	}
 
-	// Method [validateConfirm] does not exist.
-	// at Validator->__call('validateConfirm', array('email', 'toanthang1@gmail.com', array(), object(Validator))) in Validator.php line 372
-	// Custom in Validator.php
-	// public function validateConfirm()
-	// {
-	// 	dd('djklslfs');
-	// }
 }

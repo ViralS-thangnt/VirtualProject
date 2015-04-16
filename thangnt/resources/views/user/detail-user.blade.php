@@ -2,16 +2,11 @@
 
 @section('header-items')
 
-	<ul class="pure-menu-list force-right">
-
-		<li class="pure-menu-item">
-			<a class="pure-menu-link" href="{{url('auth/logout')}}" class="pure-menu-link">ログアウト</a>
-		</li>
-		
-	</ul>
+	
 @stop
 
 @section('content')
+
 
 <form method="POST" action="{!! url(DETAIL_EMPLOYEE_PATH . $data['id'] . '/delete/conf') !!}">
 <input type="hidden" name="_token" value="{{csrf_token()}}" />
@@ -86,7 +81,7 @@
 				<tr>
 					<td colspan="2" align="right">
 					<!-- To Search Button -->
-					<a class="pure-button pure-button-primary" href="">Về màn hình tìm kiếm</a>
+					<a class="pure-button pure-button-primary" href="{{ url(SEARCH_PATH) }}">Về màn hình tìm kiếm</a>
 
 					<!-- Edit button -->
 					@if(isset($data['id']) )

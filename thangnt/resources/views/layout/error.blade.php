@@ -17,3 +17,4 @@
 @if(Session::has('msg_response'))
 	{{ Session::get('msg_response') }}
 @endif
+

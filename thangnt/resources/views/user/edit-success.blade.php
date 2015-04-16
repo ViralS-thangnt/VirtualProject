@@ -40,7 +40,7 @@
 		</p>
 		<div>
 			<!-- Ve man hinh tim kiem -->
-			<a class="pure-button pure-button-primary" href="">Ve man hinh tim kiem</a>
+			<a class="pure-button pure-button-primary" href="{{ url(SEARCH_PATH) }}">Ve man hinh tim kiem 検索画面へ</a>
 			<!-- <a class="pure-button pure-button-primary" href="">検索画面へ</a> -->
 		</div>
 	</section>
