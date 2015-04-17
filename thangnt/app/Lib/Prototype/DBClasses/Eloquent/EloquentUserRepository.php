@@ -21,11 +21,25 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
 
     public function getDataListUser()
     {
-        $data = $this->model->whereEnable(ENABLE)
-                    ->orderBy('updated_at', 'desc')     // Builder
-                    ->paginate(PAGINATE_NUMBER)
-                    ;
-                    // dd($data->get());
+        $data = $this->model->whereEnable(ENABLE);
+
+        switch (\Auth::user()->role_id) {
+            case ROLE_BOSS:
+
+                $data = $data->where('boss_id', \Auth::user()->id);
+                break;
+            case ROLE_ADMIN:
+                
+                break;
+            
+            default:
+
+                return null;
+                break;
+        }
+
+        $data = $data->orderBy('updated_at', 'desc')     // Builder
+                        ->paginate(PAGINATE_NUMBER);
 
         $data->setPath('');
 
@@ -34,42 +48,45 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
 
     public function seachUserByQuery($input)
     {
-        // $result = User::;
-        // $result = User::querySearchName($input['name']);
-        $result = User::where('enable', ENABLE)->orderBy('updated_at', 'desc');
 
-        if(isset($input['name']))
+        $result = User::where('enable', ENABLE)->orderBy('updated_at', 'desc');
+// dump($result->get());
+        if(!empty($input['name']))
             $result = $result->querySearchName($input['name']);
 
-        if(isset($input['kana']))
+        if(!empty($input['kana']))
             $result = $result->querySearchKana($input['kana']);
 
-        if(isset($input['phone']))
+        if(!empty($input['phone']))
             $result = $result->querySearchPhone($input['phone']);
 
-        if(isset($input['start']) and !empty($input['start']))
-            $result = $result->querySearchDate($input['start'], $input['end']);
+        if(!empty($input['start']))
+            $result = $result->querySearchDate($input['start'], null);
 
-        if(isset($input['email']))
+        if(!empty($input['end']))
+            $result = $result->querySearchDate(null, $input['end']);
+
+        if(!empty($input['email']))
             $result = $result->querySearchEmail($input['email']);
 
-        
+        $roles = [];
+
         if(isset($input['boss']))
-            $result = $result->querySearchBoss();
+            array_push($roles, ROLE_BOSS);
 
         if(isset($input['admin']))
-            $result = $result->querySearchAdmin();
+            array_push($roles, ROLE_ADMIN);
 
         if(isset($input['employee']))
-            $result = $result->querySearchEmployee();
+            array_push($roles, ROLE_EMPLOYEE);
 
-        $result = $result->get();
+        $result = $result->querySearchRoles($roles)->get();
 
-        // Paginate
+        // Get items for Paginate
         $page = isset($input['page']) ? $input['page'] : 1;
-
         $items = $result->slice(($page - 1) * PAGINATE_NUMBER, PAGINATE_NUMBER);
 
+        // Paginate
         $pagination = new LengthAwarePaginator($items, count($result), PAGINATE_NUMBER, Paginator::resolveCurrentPage());
         $pagination->setPath('');
 
@@ -157,7 +174,8 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
     {
         $user = $this->model->find($user_id);
         $user->fill($input);
-
+        // dump($input);
+        // dd($user);
         $user->save();
     }
 

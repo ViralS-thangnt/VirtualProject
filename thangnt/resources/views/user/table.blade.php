@@ -40,8 +40,8 @@
 						<td>{!! $value['email'] !!}</td>
 						<td>{!! $value['phone'] !!}</td>
 						<td>{!! $value['birthday'] !!}</td>
-						<td>{!! $value['updated_at'] !!}</td>
-						<td>{!! getRoleNameByRoleId($value['boss_id']) !!}</td>
+						<td>{!! date_format($value['updated_at'], 'Y-m-d')  !!}</td>
+						<td>{!! $value['boss_id'] !!}</td>
 					</tr>
 					@endforeach
 				
@@ -52,7 +52,7 @@
 	</section>
 
 	@else
-		Khong co ban ghi duoc tim thay
+		Result: No record
 
 	@endif
 @endif

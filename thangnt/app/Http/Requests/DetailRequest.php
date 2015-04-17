@@ -22,10 +22,20 @@ class DetailRequest extends Request {
 	 */
 	public function rules()
 	{
-		// dd(Input::all());
+		// dd(Input::all(), Input::get('boss_id'), !empty(Input::get('boss_id')), is_array(Input::get('boss_id')), current(Input::get('boss_id')) );
 		// check permission
 
+		if(!empty(Input::get('boss_id')) and is_array(Input::get('boss_id')) and current(Input::get('boss_id')) == -1)
+		{
+			Input::merge(['boss_id' => 3]);
+			// dd('error');
+		}
 
+
+		
+// dump(Input::all());
+
+		// dd('not');
 
 
 		// check date
@@ -36,7 +46,7 @@ class DetailRequest extends Request {
 		return [
 			'name'			=>	'required|max:16',
 			'kana'			=>	'required|max:16',
-			'email'			=>	'required|email|confirmed|unique:users',
+			'email'			=>	'required|email|confirmed',
 			'email_confirmation'	=>	'required|email',
 			'phone'			=>	array('required', 'regex:/0(?:\d\-\d{4}|\d{2}\-\d{3}|\d{3}\-\d{2}|\d{4}\-\d{1})\-\d{4}$/'),	//[{0-9\-]*
 

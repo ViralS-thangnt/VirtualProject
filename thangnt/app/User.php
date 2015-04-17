@@ -63,11 +63,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $query->where('phone', 'like', '%' . $input . '%');
 	}
 
-	public function scopeQuerySearchDate($query, $start_date, $end_date)
+	public function scopeQuerySearchDate($query, $start_date = null, $end_date = null)
 	{
-		$query = $query->where('birthday', '>=', $start_date)
-						->where('birthday', '<=', $end_date);
+		if($start_date)
+			$query = $query->where('birthday', '>=', $start_date);
 
+		if($end_date)
+			$query = $query->where('birthday', '<=', $end_date);
 
 		return $query;
 	}
@@ -90,10 +92,28 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $query->where('role_id', ROLE_EMPLOYEE);
 	}
 
-	public function scopeQuerySearch($query, $array_roles)
+	public function scopeQuerySearchRoles($query, $array_roles)
 	{
-		// for($i)
-		// return $query->orWhere('role_id', ROLE_EMPLOYEE);
+		$count = count($array_roles);
+		if($array_roles == null or $count == 0)
+		{
+
+			return $query;
+		}
+
+		$query->where(function($q) use($array_roles)
+		{
+			$q->where('role_id', $array_roles[0]);
+
+			if(isset($array_roles[1]))
+				$q->orWhere('role_id', $array_roles[1]);
+
+			if(isset($array_roles[2]))
+				$q->orWhere('role_id', $array_roles[2]);
+
+		});
+
+		return $query;
 	}
 
 

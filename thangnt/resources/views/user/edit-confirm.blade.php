@@ -95,15 +95,19 @@
 							<input type="hidden" value="{!!$referer = '#'!!}">
 						@endif
 
-						<a class="pure-button pure-button-primary" href="{!! $referer !!}">Quay lại 戻る</a>
+						<a class="pure-button pure-button-primary" href="{!! $referer !!}">戻る</a>
 						<!-- Confirm Submit -->
 
-						<button class="pure-button button-error" name="submit" type="submit">Cập nhật 更新</button>
+						<button class="pure-button button-error" name="submit" type="submit">更新</button>
 
 					</td>
 				</tr>
 			</tbody>
 		</table>
+
+		<input type="hidden" name="updated_at" value="{{(new DateTime())->format('Y-m-d H:i:s')}}" />
+
+
 		</form>
 	</section>
 </section>

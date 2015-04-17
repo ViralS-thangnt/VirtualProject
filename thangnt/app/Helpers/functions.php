@@ -11,12 +11,17 @@ function checkOwnPermission($user_id)
 
 function getRoleNameByRoleId($role_id)
 {
+	// dump($role_id);
 	switch ($role_id) {
 		case ROLE_ADMIN:
 			$role_name = '管理者';
+			// $role_name = ROLE_ADMIN;
+
 			break;
 		case ROLE_BOSS:
 			$role_name = 'BOSS';
+			// $role_name = ROLE_BOSS;
+
 			break;
 		default:
 			$role_name = '従業員';

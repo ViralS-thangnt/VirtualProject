@@ -110,12 +110,15 @@
 							<option value="-1">--</option>
 							@foreach($bosses as $value)
 
-								<option value="{{ $value->id }}">{{$value->kana}}</option>
+								<option value="{{ $value->id }}" {{ ($value->id == $data['boss_id']) ? ' checked' : ''}}>{{$value->kana}}</option>
 							@endforeach
 							
 						</select>
 					</td>
 				</tr>
+
+				@else
+				<input type="hidden" name="boss_id" value="{!! $data['boss_id'] !!}"/>
 				@endif
 
 
@@ -143,7 +146,7 @@
 		</table>
 		<input type="hidden" name="id" value="{!! $data['id'] !!}"/>
 		<input type="hidden" name="role_id" value="{!! $data['role_id'] !!}"/>
-		<input type="hidden" name="boss_id" value="{!! $data['boss_id'] !!}"/>
+
 		
 
 		</form>
