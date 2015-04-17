@@ -32,7 +32,7 @@ class UserController extends Controller {
 	 */
 	public function index()
 	{
-
+		// dd('dkls');
 		// access or denied
 		// $allow_access = $this->repo->checkAccessDenied(FORM_LIST_USER);
 
@@ -87,7 +87,7 @@ class UserController extends Controller {
 
 	public function confirmEdit(DetailRequest $request, $id)
 	{
-		
+
 		return view('user.edit-confirm')->with(Input::all())
 								->with('role_name', getRoleNameByRoleId(Input::get('role_id')))
 								->with('boss_name', $this->repo->getBossNameByUserId(Input::get('boss_id')))

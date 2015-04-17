@@ -106,7 +106,7 @@ class AuthController extends Controller {
 		if ($this->auth->attempt($credentials, $request->has('remember')))
 		{
 			//$this->getPathByRole()
-
+// dd('dkls');
 			return redirect()->intended(TOP_PAGE);
 		}
 
