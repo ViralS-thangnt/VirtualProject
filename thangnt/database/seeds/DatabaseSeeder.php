@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder {
 	public function run()
 	{
 		Model::unguard();
-		DB::table('Users')->insert(array(
+		DB::table('users')->insert(array(
                array(
                     'name'		=>	'admin',
                     'email'		=>	'admin@localhost',

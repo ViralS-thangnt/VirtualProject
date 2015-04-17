@@ -33,8 +33,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	protected $hidden = ['remember_token'];
 
 
-
-
 	public function scopeQuerySearchName($query, $input)
 	{
 
@@ -77,19 +75,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function scopeQuerySearchBoss($query)
 	{
 		
-		return $query->orWhere('role_id', ROLE_BOSS);
+		return $query->where('role_id', ROLE_BOSS);
 	}
 
 	public function scopeQuerySearchAdmin($query)
 	{
 		
-		return $query->orWhere('role_id', ROLE_ADMIN);
+		return $query->where('role_id', ROLE_ADMIN);
 	}
 
 	public function scopeQuerySearchEmployee($query)
 	{
 		
-		return $query->orWhere('role_id', ROLE_EMPLOYEE);
+		return $query->where('role_id', ROLE_EMPLOYEE);
+	}
+
+	public function scopeQuerySearch($query, $array_roles)
+	{
+		// for($i)
+		// return $query->orWhere('role_id', ROLE_EMPLOYEE);
 	}
 
 

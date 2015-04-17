@@ -38,9 +38,9 @@ define('SEARCH_FULL_PATH', '/search?{search_query}');
 
 
 // define roles
-define('ROLE_ADMIN', 0);
-define('ROLE_BOSS', 1);
-define('ROLE_EMPLOYEE', 2);
+define('ROLE_ADMIN', 1);
+define('ROLE_BOSS', 2);
+define('ROLE_EMPLOYEE', 3);
 define('ROLE_NULL', null);
 
 define('ALL_ENABLE', 2);
@@ -62,18 +62,18 @@ define('DENIED_ACCESS', 0);
 define('NULL_SYMBOL', '-');
 define('ERROR_CLASS', 'error-cell');
 
-define('MESSAGE_REQUIRE', '{ja_name} が入力されていません。Ban can phai nhap {ja_name}');
-define('MESSAGE_MAX', '{ja_name} は $num 文字まで入力できます。{ja_name} co Do dai toi da $num ky tu');
-define('MESSAGE_MIN', '{ja_name} は $num 文字以上  {ja_name} co Do dai toi thieu $num ky tu');
+define('MESSAGE_REQUIRE', '{ja_name} が入力されていません。');
+define('MESSAGE_MAX', '{ja_name} は $num 文字まで入力できます。');
+define('MESSAGE_MIN', '{ja_name} は $num 文字以上  ');
 define('MESSAGE_EMPTY', 'を入力してください。');
 
-define('MESSAGE_EMAIL', 'には有効な {ja_name} を入力してください。Email của bạn không đúng định dạng');
-define('MESSAGE_EMAIL_CONFIRMED', '{ja_name_a} と {ja_name_b} が異なっています。Xac nhan email khong chinh xac');
-define('MESSAGE_EMAIL_DUPLICATE', '{ja_name}は既に使用されています。Email bi trung ');
-define('MESSAGE_EMAIL_EMPTY', '必須入力項目 {ja_name} が入力されていません。Email da khong duoc nhap');
+define('MESSAGE_EMAIL', 'には有効な {ja_name} を入力してください。');
+define('MESSAGE_EMAIL_CONFIRMED', '{ja_name_a} と {ja_name_b} が異なっています。');
+define('MESSAGE_EMAIL_DUPLICATE', '{ja_name}は既に使用されています。');
+define('MESSAGE_EMAIL_EMPTY', '必須入力項目 {ja_name} が入力されていません。');
 
 // {ja name}には有効な電話番号を入力してください。
-define('MESSAGE_PHONE_INVALID', 'には有効な {ja_name} を入力してください。So dien thoai sai dinh dang ');
+define('MESSAGE_PHONE_INVALID', 'には有効な {ja_name} を入力してください。');
 define('MESSAGE_DUPLICATE', 'は既に使用されています。');
 define('MESSAGE_DATETIME', '{ja_name} は {start_date} から {end_date} までの範囲で入力してください。');
 define('MESSAGE_LOGIN_EMAIL', '{ja_name}またはパスワードが誤っています。');

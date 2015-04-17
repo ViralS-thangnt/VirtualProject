@@ -34,11 +34,10 @@ class UserController extends Controller {
 	{
 
 		// access or denied
-		$allow_access = $this->repo->checkAccessDenied(FORM_LIST_USER);
+		// $allow_access = $this->repo->checkAccessDenied(FORM_LIST_USER);
 
-		return view('user.list-user')->withData($this->repo->getDataListUser())
-									->with('allow_access', $allow_access);
-
+		return view('user.list-user')->withData($this->repo->getDataListUser());
+									// ->with('allow_access', $allow_access);
 	}
 
 	public function detail($id)
@@ -88,7 +87,7 @@ class UserController extends Controller {
 
 	public function confirmEdit(DetailRequest $request, $id)
 	{
-
+		
 		return view('user.edit-confirm')->with(Input::all())
 								->with('role_name', getRoleNameByRoleId(Input::get('role_id')))
 								->with('boss_name', $this->repo->getBossNameByUserId(Input::get('boss_id')))

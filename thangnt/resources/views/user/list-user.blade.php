@@ -5,12 +5,13 @@
 @stop
 
 @section('content')
-@if(isset($allow_access) and $allow_access)
+@if(checkPermission())
 
 	@include('user.table')
 
 @else
-	Access Denied .
+	@include('user.access-denied')
+
 @endif
 
 	

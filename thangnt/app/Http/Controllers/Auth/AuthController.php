@@ -110,7 +110,7 @@ class AuthController extends Controller {
 			return redirect()->intended(TOP_PAGE);
 		}
 
-		return redirect($this->loginPath())
+		return 	redirect($this->loginPath())
 					->withInput($request->only('email', 'remember'))
 					->withErrors([
 						'email' => $this->getFailedLoginMessage(),

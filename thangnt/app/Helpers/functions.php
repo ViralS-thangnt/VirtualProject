@@ -1,20 +1,25 @@
 <?php
 function checkPermission()
 {
-	
+	return (\Auth::user()->role_id != ROLE_EMPLOYEE) ? true : false;
+}
+
+function checkOwnPermission($user_id)
+{
+	return (\Auth::user()->role_id == $user_id) ? true : false;
 }
 
 function getRoleNameByRoleId($role_id)
 {
 	switch ($role_id) {
 		case ROLE_ADMIN:
-			$role_name = 'Admin';
+			$role_name = '管理者';
 			break;
 		case ROLE_BOSS:
-			$role_name = 'Boss';
+			$role_name = 'BOSS';
 			break;
 		default:
-			$role_name = 'Employee';
+			$role_name = '従業員';
 			break;
 	}
 
@@ -39,9 +44,6 @@ function messageValidateLen($control_name, $num, $message)
 
 function messageValidateDuplicate($control_a, $control_b, $message)
 {
-	// $result = str_replace('$control_name', $control_name, $message);
-	// $result = str_replace('$control_name', $control_name, $message);
-	// dump($control_a, $control_b, $message);
 	$result = str_replace('{ja_name_a}', $control_a, $message);
 	$result = str_replace('{ja_name_b}', $control_b, $result);
 
@@ -94,12 +96,15 @@ function checkErrorCell($control_name, $errors)
 
 function checkLabelError($control_name, $errors)
 {
-	if(isset($errors) and $errors->get('email'))
+	if(isset($errors) and $errors->get($control_name))
 	{
 		echo '<section class="error-message">' .  current($errors->get($control_name)) . '</section>';
 	}
 }
 
-
+function logError($message)
+{
+	Log::error($message);
+}
 
 

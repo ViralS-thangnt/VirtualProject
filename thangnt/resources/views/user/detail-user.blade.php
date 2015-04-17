@@ -12,7 +12,7 @@
 <input type="hidden" name="_token" value="{{csrf_token()}}" />
 <input type="hidden" name="_method" id="_method" value="POST" />
 <section class="contents">
-	<h2>Trang đầu</h2>
+	<h2>トップページ</h2>
 	<!-- <h2>トップページ</h2> -->
 	
 	<section>
@@ -26,46 +26,47 @@
 				</tr>
 				<tr>
 					<!-- Name -->
-					<th>Name</th>
-					<!-- <th>名前</th> -->
+					<!-- <th>Name</th> -->
+					<th>名前</th>
 
 					<td>{!! isset($data['name']) ? $data['name'] : '-' !!}</td>
 				</tr>
 				<tr>
 					<!-- Name Kana -->
-					<th>Kana Name</th>
-					<!-- <th>名前（カナ）</th> -->
+					<!-- <th>Kana Name</th> -->
+					<th>名前（カナ）</th>
 					<td>{!! isset($data['kana']) ? $data['kana'] : '-' !!}</td>
 				</tr>
 				<tr>
 					<!-- Email -->
-					<!-- <th>メールアドレス</th> -->
-					<th>Email</th>
+					<th>メールアドレス</th>
+					<!-- <th>Email</th> -->
 					<td>{!! isset($data['email']) ? $data['email'] : '-' !!}</td>
 				</tr>
 				<tr>
 					<!-- Phone -->
-					<th>Phone</th>
-					<!-- <th>電話番号</th> -->
+					<!-- <th>Phone</th> -->
+					<th>電話番号</th>
 					<td>{!! isset($data['phone']) ? $data['phone'] : '-' !!}</td>
 				</tr>
 				<tr>
 					<!-- Birthday -->
-					<th>Birthday</th>
-					<!-- <th>生年月日</th> -->
+					<!-- <th>Birthday</th> -->
+					<th>生年月日</th>
 					<td>{!! isset($data['birthday']) ? $data['birthday'] : '-' !!}</td>
 				</tr>
 
-				@if(\Auth::user()->role_id != ROLE_EMPLOYEE)
+				@if(checkPermission())
 				<!-- Admin or Boss -->
 
 				<tr>
-					<!-- <th>ノート</th> -->
-					<th>Ghi chu</th>
+					<th>ノート</th>
+					<!-- <th>Ghi chu</th> -->
 					<td>{!! isset($data['note']) ? $data['note'] : '-' !!}</td>
 				</tr>
 				<tr>
 					<th>Role</th>
+					
 					<td>{!! isset($role_name) ? $role_name : '-' !!}</td>
 				</tr>
 				<tr>
@@ -73,20 +74,21 @@
 					<td>{!! isset($boss_name) ? $boss_name : '-' !!}</td>
 				</tr>
 				<tr>
-					<!-- <th>更新日時</th> -->
-					<th>Ngay sửa đổi</th>
-					<td>{!! isset($data['updated_at']) ? $data['updated_at'] : '-' !!}</td>
+					<th>更新日時</th>
+					<!-- <th>Ngay sửa đổi</th> -->
+
+					<td>{!! isset($data['updated_at']) ? date_format($data['updated_at'], 'Y-m-d') : '-' !!}</td>
 				</tr>
 
 				<tr>
 					<td colspan="2" align="right">
 					<!-- To Search Button -->
-					<a class="pure-button pure-button-primary" href="{{ url(SEARCH_PATH) }}">Về màn hình tìm kiếm</a>
+					<a class="pure-button pure-button-primary" href="{{ url(SEARCH_PATH) }}">検索画面へ</a>
 
 					<!-- Edit button -->
 					@if(isset($data['id']) )
 					
-						<a class="pure-button button-secondary" href="{!! url(DETAIL_EMPLOYEE_PATH . $data['id'] . '/edit') !!}">Edit</a>
+						<a class="pure-button button-secondary" href="{!! url(DETAIL_EMPLOYEE_PATH . $data['id'] . '/edit') !!}">編集</a>
 
 						<!-- <a class="pure-button button-secondary" href="{!! url(DETAIL_EMPLOYEE_PATH . $data['id'] . '/edit') !!}">編集</a> -->
 						<!-- <button class="pure-button button-error" name="submit" type="submit">編集</button> -->
@@ -100,7 +102,9 @@
 
 					<!-- Delete Button  -->
 					<!-- 編集 -->
-					<button class="pure-button button-error" name="submit" type="submit">Delete</button>
+					@if(checkOwnPermission(\Auth::user()->id))
+						<button class="pure-button button-error" name="submit" type="submit">削除</button>
+					@endif
 					
 					</td>
 				</tr>
@@ -111,7 +115,7 @@
 				@if(isset($data['id']) )
 				<tr>
 					<td colspan="2" align="right">
-						<a class="pure-button button-secondary" href="{!! url(DETAIL_EMPLOYEE_PATH . $data['id'] . '/edit') !!}">Edit</a>
+						<a class="pure-button button-secondary" href="{!! url(DETAIL_EMPLOYEE_PATH . $data['id'] . '/edit') !!}">編集</a>
 					</td>
 				</tr>
 				@endif

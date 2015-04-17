@@ -6,7 +6,7 @@
 		@foreach($errors->all() as $error)
 		
 			{{ $error }} </br>
-		
+			{{ logError($error)}}
 		@endforeach
 		</ul>
 	</section>
@@ -15,6 +15,9 @@
 @endif	
 	
 @if(Session::has('msg_response'))
-	{{ Session::get('msg_response') }}
-@endif
 
+<section>
+	{{ Session::get('msg_response') }}
+</section>
+
+@endif

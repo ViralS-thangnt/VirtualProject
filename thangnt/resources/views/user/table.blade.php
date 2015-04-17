@@ -1,8 +1,10 @@
+
 @if($data)
 	@if(count($data) > 0)
-
-
-	<section>
+	
+	<section class="contents"> 
+		@include('user.paginate-links')
+		
 		<table class="pure-table pure-table-bordered">
 			<thead>
 				<tr>
@@ -28,22 +30,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				
+				<input type="hidden" value="{{$is_odd = true}}" />
 					@foreach($data as $value)
-					<tr class="pure-table-odd">
+					<tr class="
+						{{$is_odd ? 'pure-table-odd' : ''}}
+						{{$is_odd = !$is_odd}}	">
 						<td>{!! $value['id'] !!}</td>
-						<td><a href="{!! url(DETAIL_EMPLOYEE_PATH . $value['id'] . '/detail') !!}">{!! $value['name'] !!}</a></td>
+						<td><a href="{!! url(DETAIL_EMPLOYEE_PATH . $value['id'] . '/detail') !!}">{!! $value['kana'] !!} ({!! $value['name'] !!})</a></td>
 						<td>{!! $value['email'] !!}</td>
 						<td>{!! $value['phone'] !!}</td>
 						<td>{!! $value['birthday'] !!}</td>
 						<td>{!! $value['updated_at'] !!}</td>
-						<td>{!! $value['boss_id'] !!}</td>
+						<td>{!! getRoleNameByRoleId($value['boss_id']) !!}</td>
 					</tr>
 					@endforeach
 				
 			</tbody>
 		</table>
 
+		@include('user.paginate-links')
 	</section>
 
 	@else

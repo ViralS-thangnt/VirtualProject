@@ -30,11 +30,11 @@ class LoginRequest extends Request {
 	public function messages()
 	{
 		return [
-			'email.required'				=>	'メールアドレス が入力されていません。Ban can phai nhap email',
+			'email.required'				=>	messageValidate('メールアドレス', MESSAGE_REQUIRE), //'メールアドレス が入力されていません。Ban can phai nhap email',
 			// 'email.email'					=>	'メールアドレス またはパスワードが誤っています。Email của bạn không đúng định dạng',
-			'password.required'				=>	'パスワード が入力されていません。Ban can phai nhap password',
-			'password.min'					=>	'メールアドレスまたは パスワード が誤っています。 Password không thể nhỏ hơn 8 ký tự',
-			'password.max'					=>	'メールアドレスまたは パスワード が誤っています。 Password không thể lớn hơn 32 ký tự ',
+			'password.required'				=>	messageValidate('メールアドレス（確認）', MESSAGE_REQUIRE),//'パスワード が入力されていません。Ban can phai nhap password',
+			'password.min'					=>	messageValidateLen('パスワード', '8', MESSAGE_MIN), //'メールアドレスまたは パスワード が誤っています。 Password không thể nhỏ hơn 8 ký tự',
+			'password.max'					=>	messageValidateLen('パスワード', '32', MESSAGE_MAX), //'メールアドレスまたは パスワード が誤っています。 Password không thể lớn hơn 32 ký tự ',
 		];
 	}
 
