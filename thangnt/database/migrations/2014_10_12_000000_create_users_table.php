@@ -24,8 +24,8 @@ class CreateUsersTable extends Migration {
 			$table->integer('role_id');
 			$table->string('phone')->nullable();
 			$table->string('note')->nullable();
-			$table->integer('boss_id');
-			$table->timestamps('birthday');
+			$table->integer('boss_id')->nullable();
+			$table->timestamp('birthday');
 			$table->boolean('enable', 1);
 
 

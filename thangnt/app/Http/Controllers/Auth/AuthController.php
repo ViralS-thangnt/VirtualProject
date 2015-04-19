@@ -107,7 +107,7 @@ class AuthController extends Controller {
 		// dd($credentials);
 		if ($this->auth->attempt($credentials, $request->has('remember')))
 		{
-
+			// dd(TOP_PAGE);
 			return redirect()->intended(TOP_PAGE);
 		}
 

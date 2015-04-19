@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder {
                     'name'		=>	'admin',
                     'email'		=>	'admin@localhost',
                     'password'	=>	bcrypt('SxRVYMtn'),
-                    'enable'	=>	1
+                    'enable'	=>	1, 
+                    'role_id'	=>	ROLE_ADMIN,
                     //hash('sha256', 'SxRVYMtn')
                     )
                ));

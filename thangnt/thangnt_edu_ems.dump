@@ -16,18 +16,18 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Users`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `Users`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Users` (
+CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `password` varchar(70) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
   `kana` varchar(16) DEFAULT NULL,
-  `role_id` int(11) DEFAULT NULL,
+  `role_id` int(4) DEFAULT NULL,
   `email` varchar(100) NOT NULL DEFAULT '',
   `phone` varchar(13) DEFAULT NULL,
   `note` varchar(300) DEFAULT NULL,
@@ -45,13 +45,15 @@ CREATE TABLE `Users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Users`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `Users` WRITE;
-/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (11,'$2y$10$tjkulNPJTaAtnpc9n1HPxOyufem3xlhCBeqqG2azsdm5ZOkPkgFae','admin','thang',1,'admin@localhost',NULL,'comment',NULL,'2000-04-01 10:00:00',1,NULL,'2015-04-17 18:37:48','nwkLc5FBylJ4vHCCwHMmTjTaRjo4ZcBTdWMmkn9HqZpmqhZOeqYkQGF4qCEG',0);
-/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `kana`, `sex`, `role_id`, `phone`, `note`, `boss_id`, `birthday`, `enable`, `remember_token`, `created_at`, `updated_at`)
+VALUES (1, 'admin', 'admin@localhost', '$2y$10$RxhzbBLO/SRCJj3pVik9n.UGpepf1eNwa7XFbmvfoVAPLlamAgs72', 'thang', 1, 1, '09-9999-8888', NULL, 0, '1999-04-18 17:05:06', 1, 'pKfquklTL7XXMVCR1ikPw6pptoSb1OsUyP03sntrcAgbcOrEcRzyq3WAJkeF', '2015-04-18 17:05:06', '2015-04-18 17:05:06');
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

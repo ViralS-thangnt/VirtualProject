@@ -22,6 +22,7 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
     public function getDataListUser()
     {
         $data = $this->model->whereEnable(ENABLE);
+        // dd();
 // dump(\Auth::user()->id);
         switch (\Auth::user()->role_id) {
             case ROLE_BOSS:
