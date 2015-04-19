@@ -6,7 +6,7 @@ function checkPermission()
 
 function checkOwnPermission($user_id)
 {
-	return (\Auth::user()->role_id == $user_id) ? true : false;
+	return (\Auth::user()->boss_id != $user_id) ? true : false;
 }
 
 function getRoleNameByRoleId($role_id)
@@ -57,9 +57,6 @@ function messageValidateDuplicate($control_a, $control_b, $message)
 
 function messageValidateMulti($message, $control_name_array)
 {
-	// $result = str_replace('$control_name', $control_name, $message);
-	// $result = str_replace('$control_name', $control_name, $message);
-
 	foreach ($control_name_array as $value) {
 		$result = str_replace($value, '', $message);
 	}
@@ -77,10 +74,22 @@ function messageValidateDateTime($control_name, $start, $end, $message)
 	$result = str_replace('{ja_name}', $control_name, $message);
 	$result = str_replace('{start_date}', $start, $result);
 	$result = str_replace('{end_date}', $end, $result);
-	// $result = str_replace('{ja_name_b}', $control_b, $result);
 	
 	return $result;
 
+}
+
+function messageValidateIn($control_name, $message)
+{
+	$result = str_replace('{ja_name}', $control_name, $message);
+
+	return $result;
+}
+
+function messageValidateNotIn($control_name, $message)
+{
+
+	return $result;
 }
 
 function checkGetValue($name, $default_value = '')

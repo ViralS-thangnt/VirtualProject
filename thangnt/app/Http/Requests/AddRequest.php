@@ -5,6 +5,7 @@ use Input;
 
 class AddRequest extends Request {
 
+
 	/**
 	 * Determine if the user is authorized to make this request.
 	 *
@@ -12,6 +13,7 @@ class AddRequest extends Request {
 	 */
 	public function authorize()
 	{
+
 		return true;//\Auth::check();//false;
 	}
 
@@ -22,7 +24,13 @@ class AddRequest extends Request {
 	 */
 	public function rules()
 	{
-		// dump(Input::all());
+
+		if(!(Input::get('role_id') == ROLE_BOSS and Input::get('boss_id') == DONT_SELECT))
+			// Input::merge(['boss_id' => DONT_SELECT]);
+			Input::merge(['boss_id'	=> Input::get('boss_id')]);	
+
+		Input::merge(['role_id' => 0]);
+
 		$start_date = '1970-01-01';
 		$end_date = time() - 10*365*24*3600;	// before 10 year
 		$end_date = date('Y', $end_date) . '-01-01';
@@ -37,12 +45,15 @@ class AddRequest extends Request {
 			'birthday'		=>	'required|date_format:Y-m-d|after:' . $start_date . '|before:' . $end_date,
 			'note'			=>	'required|max:300',
 			'password'		=>	'required|min:8|max:32',
+
+			'boss_id'		=>	'not_in:' . DONT_SELECT,
 		];
 
 	}
 
 	public function messages()
 	{
+		Input::all();
 		$start_date = '1970-01-01';
 		$end_date = time() - 10*365*24*3600;	// before 10 year
 		$end_date = date('Y', $end_date) . '-01-01';
@@ -78,15 +89,7 @@ class AddRequest extends Request {
 			'password.min'				=>	messageValidateLen('パスワード', '8', MESSAGE_MIN),	//'メールアドレスまたは パスワード が誤っています。 Password không thể nhỏ hơn 8 ký tự',
 			'password.max'				=>	messageValidateLen('パスワード', '32', MESSAGE_MAX),	//'メールアドレスまたは パスワード が誤っています。 Password không thể lớn hơn 32 ký tự ',
 
-
+			'boss_id.not_in'			=>	MESSAGE_BOSS_EMPTY_EMPLOYEE,
 		];
 	}
-
-	// Method [validateConfirm] does not exist.
-	// at Validator->__call('validateConfirm', array('email', 'toanthang1@gmail.com', array(), object(Validator))) in Validator.php line 372
-	// Custom in Validator.php
-	// public function validateConfirm()
-	// {
-	// 	dd('djklslfs');
-	// }
 }

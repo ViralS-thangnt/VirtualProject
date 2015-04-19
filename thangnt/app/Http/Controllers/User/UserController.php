@@ -87,8 +87,7 @@ class UserController extends Controller {
 
 	public function confirmEdit(DetailRequest $request, $id)
 	{
-		
-		// dd($id);
+
 		return view('user.edit-confirm')->with(Input::all())
 								->with('role_name', getRoleNameByRoleId(Input::get('role_id')))
 								->with('boss_name', $this->repo->getBossNameByUserId(Input::get('boss_id')))
@@ -125,7 +124,6 @@ class UserController extends Controller {
 
 	public function confirmDelete($id)
 	{
-
 		return view('user.delete-confirm')->withData($this->repo->getUserById($id))
 								->with('role_name', getRoleNameByRoleId(Input::get('role_id')))
 								->with('boss_name', $this->repo->getBossNameByUserId(Input::get('boss_id')))

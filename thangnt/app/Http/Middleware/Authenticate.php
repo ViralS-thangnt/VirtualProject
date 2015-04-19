@@ -40,7 +40,10 @@ class Authenticate {
 			}
 			else
 			{
+				// return redirect()->guest(LIST_USER_PATH);
 				return redirect()->guest('auth/login');
+				
+				//LIST_USER_PATH
 			}
 		}
 

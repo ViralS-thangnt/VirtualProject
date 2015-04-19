@@ -84,10 +84,10 @@
 				</tr>
 
 
-				@if(\Auth::user()->role_id == ROLE_ADMIN)
+				@if(\Auth::user()->role_id != ROLE_EMPLOYEE)
 				<tr>
 					<th class="{!! checkErrorCell('role_id', $errors) !!}">権限</th>
-					<td><select name="role_id[]" class="pure-input-1">
+					<td><select name="role_id" class="pure-input-1">
 							<option value="{!! ROLE_EMPLOYEE !!}">従業員</option>
 							<option value="{!! ROLE_BOSS !!}">BOSS</option>
 							<option value="{!! ROLE_ADMIN !!}">管理者</option>
@@ -98,8 +98,8 @@
 
 				<tr>
 					<th class="{!! checkErrorCell('boss_id', $errors) !!}">BOSS</th>
-					<td><select name="boss_id[]" class="pure-input-1">
-							<option value="-1">--</option>
+					<td><select name="boss_id" class="pure-input-1">
+							<option value="{{DONT_SELECT}}">{{NULL_SYMBOL}}</option>
 							@foreach($bosses as $value)
 
 								<option value="{{ $value->id }}">{{$value->kana}}</option>

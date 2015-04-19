@@ -2,7 +2,9 @@
 
 @section('content')
 
-Ban da logout thanh cong !
+ログアウト
+
+ログアウトしました。
 
 
 @stop

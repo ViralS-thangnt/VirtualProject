@@ -41,7 +41,7 @@
 						<td>{!! $value['phone'] !!}</td>
 						<td>{!! $value['birthday'] !!}</td>
 						<td>{!! date_format($value['updated_at'], 'Y-m-d')  !!}</td>
-						<td>{!! $value['boss_id'] !!}</td>
+						<td>{!! getRoleNameByRoleId($value['role_id']) !!}</td>
 					</tr>
 					@endforeach
 				

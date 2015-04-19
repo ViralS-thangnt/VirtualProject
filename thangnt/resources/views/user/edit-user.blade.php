@@ -5,6 +5,11 @@
 @section('content')
 
 
+@if ((!checkPermission() and \Auth::user()->id != $data['id']) or
+		(\Auth::user()->role_id == ROLE_BOSS and $data['role_id'] == ROLE_ADMIN))
+	@include('user.access-denied')
+@else
+	
 @include('layout.error')
 
 <section class="contents">
@@ -72,6 +77,8 @@
 				</tr>
 
 
+				@if(checkPermission())
+
 				<tr>
 					<!-- Note -->
 					<th class="{!! checkErrorCell('note', $errors) !!}">ノート</th>
@@ -82,7 +89,7 @@
 					</td>
 				</tr>
 
-
+				@endif
 				<tr>
 					<!-- Password -->
 					<th class="{!! checkErrorCell('password', $errors) !!}">パスワード</th>
@@ -153,5 +160,5 @@
 	</section>
 </section>
 
-
+@endif
 @stop

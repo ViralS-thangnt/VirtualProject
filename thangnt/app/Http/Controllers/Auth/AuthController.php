@@ -98,15 +98,16 @@ class AuthController extends Controller {
 
 		$credentials = $request->only('email', 'password');
 
-		$credentials = array(
-								'email'		=>	$credentials['email'],
-								'password'	=>	$credentials['password'],
-								'enable'	=>	1);
+		// $credentials = array(
+		// 						'email'		=>	DB::raw('"' . $credentials['email'] . '"'),
+		// 						'password'	=>	$credentials['password'],
+		// 						'enable'	=>	1);
 
+		$credentials = array_merge($credentials, ['enable' => 1]);
+		// dd($credentials);
 		if ($this->auth->attempt($credentials, $request->has('remember')))
 		{
-			//$this->getPathByRole()
-// dd('dkls');
+
 			return redirect()->intended(TOP_PAGE);
 		}
 

@@ -1,6 +1,6 @@
 <?php
 
-define('MESSAGE_USER_CREDENTIALS_ERROR', 'These credentials do not match our records.');
+define('MESSAGE_USER_CREDENTIALS_ERROR', 'メールまたはパスワードが正しくありません。');
 define('LOGIN_PATH', '/auth/login');
 define('LIST_USER_PATH', 'all');
 define('BACK_TO_PREVIOUS_PAGE', 'back');
@@ -37,6 +37,7 @@ define('SEARCH_FULL_PATH', '/search?{search_query}');
 // define('LOGOUT_SUCCESS', '/logout');
 
 
+
 // define roles
 define('ROLE_ADMIN', 1);
 define('ROLE_BOSS', 2);
@@ -59,8 +60,10 @@ define('ALLOW_ACCESS', 1);
 define('DENIED_ACCESS', 0);
 
 // null
-define('NULL_SYMBOL', '-');
+define('NULL_SYMBOL', '--');
 define('ERROR_CLASS', 'error-cell');
+define('DONT_SELECT', '-1');
+
 
 define('MESSAGE_REQUIRE', '{ja_name} が入力されていません。');
 define('MESSAGE_MAX', '{ja_name} は $num 文字まで入力できます。');
@@ -78,3 +81,7 @@ define('MESSAGE_DUPLICATE', 'は既に使用されています。');
 define('MESSAGE_DATETIME', '{ja_name} は {start_date} から {end_date} までの範囲で入力してください。');
 define('MESSAGE_LOGIN_EMAIL', '{ja_name}またはパスワードが誤っています。');
 define('MESSAGE_LOGIN_PASSWORD', '{ja_name}またはパスワードが誤っています。');
+
+define('MESSAGE_IN_INVALID', '{ja_name}に未定義の値が入力されました。');
+define('MESSAGE_BOSS_EMPTY_EMPLOYEE', 'BOSSを設定する場合、権限は従業員を選択する必要があります。');
+

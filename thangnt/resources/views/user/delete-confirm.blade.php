@@ -7,8 +7,8 @@
 @section('content')
 
 <section class="contents">
-	<!-- <h2>削除（確認）</h2> -->
-	<h2>Xác nhận Delete </h2>
+	<h2>削除（確認）</h2>
+	<!-- <h2>Xác nhận Delete </h2> -->
 
 
 	<section>
@@ -25,19 +25,19 @@
 				<tr>
 					<!-- <th>名前</th>
 					<td>青木 栄一</td> -->
-					<th>Tên gọi 名前</th>
+					<th>名前</th>
 					<td>{!! $data['name'] !!}</td>
 					<input type="hidden" name="name" value="{!! $data['name'] !!}"/>
 				</tr>
 				<tr>
-					<th>Ten Kana 名前（カナ）</th>
+					<th>名前（カナ）</th>
 					<td>{!! $data['kana'] !!}</td>
 					<input type="hidden" name="kana" value="{!! $data['kana'] !!}"/>
 					<!-- <th>名前（カナ）</th>
 					<td>あおき えいいち</td> -->
 				</tr>
 				<tr>
-					<th>Email</th>
+					<th>メールアドレス</th>
 					<td>{!! $data['email'] !!}</td>
 					<input type="hidden" name="email" value="{!! $data['email'] !!}"/>
 
@@ -47,12 +47,12 @@
 				<tr>
 					<!-- <th>電話番号</th>
 					<td>090-0123-4567</td> -->
-					<th>Phone 電話番号</th>
+					<th>電話番号</th>
 					<td>{!! $data['phone'] !!}</td>
 					<input type="hidden" name="phone" value="{!! $data['phone'] !!}"/>
 				</tr>
 				<tr>
-					<th>Ngay sinh</th>
+					<th>生年月日</th>
 					<td>{!! $data['birthday'] !!}</td>
 					<input type="hidden" name="birthday" value="{!! $data['birthday'] !!}"/>
 
@@ -63,7 +63,7 @@
 					<!-- <th>ノート</th>
 					<td>日本の地理学者。<br>東京学芸大学名誉教授。<br>理学博士。<br>歴史地理学会会長。<br>元駿河台大学教授。<br>専門は文化地理学、交通地理学、地図情報論、交通情報論、産業考古学。<br>研究テーマは地域社会を通じての鉄道の歴史地理学、シーパワーの政治地理学、及び海事史。<br>鉄道ファンとして知られる。<br>またそれを個人的趣味にとどめることなく、主にアマチュアである鉄道ファンによって支えられてきた鉄道分野の研究を、文化地理学の一環として認知・昇華させるべく活動している。
 					</td> -->
-					<th>Chú ý</th>
+					<th>ノート</th>
 					<td>
 						{!! $data['note'] !!}
 					</td>
@@ -72,7 +72,7 @@
 				<tr>
 					<!-- <th>権限</th>
 					<td>従業員</td> -->
-					<th>Role</th>
+					<th>権限</th>
 					<td>{!! $role_name !!}</td>
 				</tr>
 				<tr>
@@ -99,10 +99,10 @@
 					@endif
 
 
-					<a class="pure-button pure-button-primary" href="{!! $referer !!}">Quay lại 戻る</a>
+					<a class="pure-button pure-button-primary" href="{!! $referer !!}">戻る</a>
 
 					<!-- Confirm Submit -->
-					<button class="pure-button button-error" name="submit" type="submit">Cập nhật 更新</button>
+					<button class="pure-button button-error" name="submit" type="submit">更新</button>
 
 					@endif
 

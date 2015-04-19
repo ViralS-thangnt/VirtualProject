@@ -22,7 +22,7 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
     public function getDataListUser()
     {
         $data = $this->model->whereEnable(ENABLE);
-
+// dump(\Auth::user()->id);
         switch (\Auth::user()->role_id) {
             case ROLE_BOSS:
 
@@ -37,7 +37,7 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
                 return null;
                 break;
         }
-
+                
         $data = $data->orderBy('updated_at', 'desc')     // Builder
                         ->paginate(PAGINATE_NUMBER);
 
@@ -68,6 +68,9 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserI
 
         if(!empty($input['email']))
             $result = $result->querySearchEmail($input['email']);
+
+        if(\Auth::user()->role_id == ROLE_BOSS)
+            $result = $result->where('boss_id', \Auth::user()->id);
 
         $roles = [];
 

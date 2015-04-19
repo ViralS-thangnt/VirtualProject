@@ -22,21 +22,14 @@ class DetailRequest extends Request {
 	 */
 	public function rules()
 	{
-		// dd(Input::all(), Input::get('boss_id'), !empty(Input::get('boss_id')), is_array(Input::get('boss_id')), current(Input::get('boss_id')) );
 		// check permission
-
-		if(!empty(Input::get('boss_id')) and is_array(Input::get('boss_id')) and current(Input::get('boss_id')) == -1)
+		if(!empty(Input::get('role_id')) and is_array(Input::get('role_id')) and current(Input::get('role_id')) == - 1)
 		{
-			Input::merge(['boss_id' => 3]);
-			// dd('error');
+			Input::merge(['role_id' => ROLE_EMPLOYEE]);
 		}
 
-
-		
-// dump(Input::all());
-
-		// dd('not');
-
+		if(\Auth::user()->role_id == ROLE_BOSS and Input::get('role_id') == ROLE_ADMIN)
+			Input::merge(['role_id' => ROLE_NULL]);
 
 		// check date
 		$start_date = '1970-01-01';
@@ -54,7 +47,7 @@ class DetailRequest extends Request {
 			'birthday'		=>	'required|date_format:Y-m-d|after:' . $start_date . '|before:' . $end_date,
 			'note'			=>	'required|max:300',
 			'password'		=>	'required|min:8|max:32',
-
+			'role_id'		=>	'in:' . ROLE_ADMIN . ',' . ROLE_BOSS . ',' . ROLE_EMPLOYEE,
 		];
 	}
 
@@ -95,6 +88,7 @@ class DetailRequest extends Request {
 			'password.min'				=>	messageValidateLen('パスワード', '8', MESSAGE_MIN),	//'メールアドレスまたは パスワード が誤っています。 Password không thể nhỏ hơn 8 ký tự',
 			'password.max'				=>	messageValidateLen('パスワード', '32', MESSAGE_MAX),	//'メールアドレスまたは パスワード が誤っています。 Password không thể lớn hơn 32 ký tự ',
 
+			'role_id.in'				=>	messageValidateIn('権限', MESSAGE_IN_INVALID),
 		];
 	}
 

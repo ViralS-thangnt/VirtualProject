@@ -1,6 +1,6 @@
 <?php namespace App\Lib\Prototype\Common;
 
-
+use Input;
 use Illuminate\Pagination\BootstrapThreePresenter;
 
 class CustomPaginateUser extends BootstrapThreePresenter
@@ -15,13 +15,24 @@ class CustomPaginateUser extends BootstrapThreePresenter
         if( ! $this->hasPages())
             return '';
 
+        $input_params = Input::all();
+        $parameters = '&';
+        if(count($input_params) > 0)
+        	
+        	foreach ($input_params as $key => $value) {
+				($value != '' and $key != 'page') ? $parameters .= $key . '=' .$value . '&' : '';
+			}
+			
+		$middle_links = $this->getLinks($parameters);
+		// $middle_links = getLinks();
+
         $links =  sprintf(
             ' %s  %s  %s  %s  %s ',
-            $this->getFirstButton(),
-            $this->getPreviousButton(),
-            $this->getLinks(),
-            $this->getNextButton(),
-            $this->getLastButton()
+            $this->getFirstButton('First', $parameters),
+            $this->getPreviousButton('Previous', $parameters),
+            $middle_links,
+            $this->getNextButton('Next', $parameters),
+            $this->getLastButton('Last', $parameters)
         );
 
         return $links;
@@ -32,27 +43,39 @@ class CustomPaginateUser extends BootstrapThreePresenter
 	 *
 	 * @return string
 	 */
-    protected function getLinks()
+    protected function getLinks($input_params = '')
 	{
+		// dump(count(Input::all()), Input::all());
+
+		// if(count(Input::all()) <= 0)
+		// 	return $this->getLinksNotParameter();
+		// dd($input_params);
+		return $this->getLinksHasParameter($input_params);
+	}
+
+	public function getLinksHasParameter($input_params)
+	{
+		$parameters = $input_params;
+
 		$html = '';
 
 		// dd($this->window['first']);
 
 		if (is_array($this->window['first']))
 		{
-			$html .= $this->getUrlLinks($this->window['first']);
+			$html .= $this->getUrlLinks($this->window['first'], $parameters);
 		}
 
 		if (is_array($this->window['slider']))
 		{
 			$html .= $this->getDots();
-			$html .= $this->getUrlLinks($this->window['slider']);
+			$html .= $this->getUrlLinks($this->window['slider'], $parameters);
 		}
 
 		if (is_array($this->window['last']))
 		{
 			$html .= $this->getDots();
-			$html .= $this->getUrlLinks($this->window['last']);
+			$html .= $this->getUrlLinks($this->window['last'], $parameters);
 		}
 
 		return $html;
@@ -64,7 +87,7 @@ class CustomPaginateUser extends BootstrapThreePresenter
 	 * @param  array  $urls
 	 * @return string
 	 */
-	protected function getUrlLinks(array $urls)
+	protected function getUrlLinks(array $urls, $parameters = '')
 	{	
 		$html = '';
 
@@ -77,9 +100,9 @@ class CustomPaginateUser extends BootstrapThreePresenter
 		{
 			$html = '<li class="pure-menu-item"><span> ... </span></li>';
 			
-			$html .= $this->getPageLinkWrapper($link . ($currentPage - 1), ($currentPage - 1));
-			$html .= $this->getPageLinkWrapper($link . $currentPage, $currentPage);
-			$html .= $this->getPageLinkWrapper($link . ($currentPage + 1), ($currentPage + 1));
+			$html .= $this->getPageLinkWrapper($link . ($currentPage - 1), ($currentPage - 1), null, $parameters);
+			$html .= $this->getPageLinkWrapper($link . $currentPage, $currentPage, null, $parameters);
+			$html .= $this->getPageLinkWrapper($link . ($currentPage + 1), ($currentPage + 1), null, $parameters);
 
 			$html .= '<li class="pure-menu-item"><span> ... </span></li>';
 			
@@ -87,18 +110,17 @@ class CustomPaginateUser extends BootstrapThreePresenter
 		else if ($currentPage == 1)
 		{
 			// Current position: First Page
-
-			$html .= $this->getPageLinkWrapper($link . $currentPage, $currentPage);
+			$html .= $this->getPageLinkWrapper($link . $currentPage, $currentPage, null, $parameters);
 
 			if($lastPage - $currentPage > 0)
 			{
-				$html .= $this->getPageLinkWrapper($link . ($currentPage + 1), ($currentPage + 1));
+				$html .= $this->getPageLinkWrapper($link . ($currentPage + 1), ($currentPage + 1), null, $parameters);
 				
 			}
 
 			if($lastPage - $currentPage > 1)
 			{
-				$html .= $this->getPageLinkWrapper($link . ($currentPage + 2), ($currentPage + 2));
+				$html .= $this->getPageLinkWrapper($link . ($currentPage + 2), ($currentPage + 2), null, $parameters);
 			}
 
 			$html .= '<li class="pure-menu-item"><span> ... </span></li>';
@@ -111,23 +133,23 @@ class CustomPaginateUser extends BootstrapThreePresenter
 			$html .= '<li class="pure-menu-item"><span> ... </span></li>';
 			if($lastPage > 2)
 			{
-				$html .= $this->getPageLinkWrapper($link . ($currentPage - 2), ($currentPage - 2));
+				$html .= $this->getPageLinkWrapper($link . ($currentPage - 2), ($currentPage - 2), null, $parameters);
 				
 			}
 
 			if($lastPage > 1)
 			{
-				$html .= $this->getPageLinkWrapper($link . ($currentPage - 1), ($currentPage - 1));
+				$html .= $this->getPageLinkWrapper($link . ($currentPage - 1), ($currentPage - 1), null, $parameters);
 			}
 
-			$html .= $this->getPageLinkWrapper($link . ($currentPage), ($currentPage));
+			$html .= $this->getPageLinkWrapper($link . ($currentPage), ($currentPage), null, $parameters);
 
 		}
 
 		return $html;
 	}
 
-    protected function getFirstButton($text = 'First')
+    protected function getFirstButton($text = 'First', $parameters = '')
 	{
 		if ($this->paginator->currentPage() <= 1)
 		{
@@ -136,12 +158,12 @@ class CustomPaginateUser extends BootstrapThreePresenter
 
 		$url = '?page=1';
 
-		return $this->getPageLinkWrapper($url, $text, 'First');
+		return $this->getPageLinkWrapper($url, $text, 'First', $parameters);
 
 		// return '<li class="pure-menu-item"><a href="" class="pure-menu-link pure-button">First</a></li>';
 	}
 
-	protected function getLastButton($text = 'Last')
+	protected function getLastButton($text = 'Last', $parameters = '')
 	{
 		if ( ! $this->paginator->hasMorePages())
 		{
@@ -150,7 +172,7 @@ class CustomPaginateUser extends BootstrapThreePresenter
 
 		$url = '?page=' . $this->paginator->lastPage();
 
-		return $this->getPageLinkWrapper($url, $text, 'Last');
+		return $this->getPageLinkWrapper($url, $text, 'Last', $parameters);
 	}
 
 	/**
@@ -159,7 +181,7 @@ class CustomPaginateUser extends BootstrapThreePresenter
 	 * @param  string  $text
 	 * @return string
 	 */
-	protected function getNextButton($text = 'Next')
+	protected function getNextButton($text = 'Next', $parameters = '')
 	{
 		// If the current page is greater than or equal to the last page, it means we
 		// can't go any further into the pages, as we're already on this last page
@@ -170,8 +192,8 @@ class CustomPaginateUser extends BootstrapThreePresenter
 		}
 
 		$url = $this->paginator->url($this->paginator->currentPage() + 1);
-		// dump($url);
-		return $this->getPageLinkWrapper($url, $text, 'next');
+
+		return $this->getPageLinkWrapper($url, $text, 'next', $parameters);
 	}
 
 
@@ -181,7 +203,7 @@ class CustomPaginateUser extends BootstrapThreePresenter
 	 * @param  string  $text
 	 * @return string
 	 */
-	protected function getPreviousButton($text = 'Previous')
+	protected function getPreviousButton($text = 'Previous', $parameters = '')
 	{
 		// If the current page is less than or equal to one, it means we can't go any
 		// further back in the pages, so we will render a disabled previous button
@@ -195,7 +217,7 @@ class CustomPaginateUser extends BootstrapThreePresenter
 			$this->paginator->currentPage() - 1
 		);
 
-		return $this->getPageLinkWrapper($url, $text, 'prev');
+		return $this->getPageLinkWrapper($url, $text, 'prev', $parameters);
 	}
 
 
@@ -212,33 +234,7 @@ class CustomPaginateUser extends BootstrapThreePresenter
 		}
 	}
 
-    /**
-     * Get HTML wrapper for disabled text.
-     *
-     * @param  string  $text
-     * @return string
-     */
-    protected function getDisabledTextWrapper($text)
-    {
-    	// Trang hien tai la trang dau hoac cuoi
 
-        return '<li class="pure-menu-item"><button class="pure-button pure-button-disabled">'.$text.'</button></li>';
-    }
-
-    /**
-     * Get HTML wrapper for active text.
-     *
-     * @param  string  $text
-     * @return string
-     */
-    protected function getActivePageWrapper($text)
-    {
-    	// Link cho Trang hien tai 
-    	// Page current text
-
-        return '<li class="pure-menu-item"><button class="pure-button pure-button-disabled">' . $text . '</button></li>';        
-
-    }
 
     /**
      * Get a pagination "dot" element.
@@ -261,15 +257,17 @@ class CustomPaginateUser extends BootstrapThreePresenter
 	 * @param  string|null  $rel
 	 * @return string
 	 */
-	protected function getPageLinkWrapper($url, $page, $rel = null)
+	protected function getPageLinkWrapper($url, $page, $rel = null, $parameters = '')
 	{
+		// dump('getPageLinkWrapper:' . $parameters);
+		// dump($url);
 		if ($page == $this->paginator->currentPage())
 		{
 			return $this->getActivePageWrapper($page);
 		}
 		// dump($this->getAvailablePageWrapper($url, $page, $rel));
 
-		return $this->getAvailablePageWrapper($url, $page, $rel);
+		return $this->getAvailablePageWrapper($url, $page, $rel, $parameters);
 	}
 
 	/**
@@ -280,13 +278,43 @@ class CustomPaginateUser extends BootstrapThreePresenter
 	 * @param  string|null  $rel
 	 * @return string
 	 */
-	protected function getAvailablePageWrapper($url, $page, $rel = null)
+	protected function getAvailablePageWrapper($url, $page, $rel = null, $parameters = '')
 	{
 		$rel = is_null($rel) ? '' : ' rel="'.$rel.'"';
 		// dump($url, $rel, $page);
 		// <a href="" class="pure-menu-link pure-button">first</a>
 
-		return '<span>        </span><li class="pure-menu-item"><a class="pure-menu-link pure-button" href="'.$url.'"'.$rel.'>'.$page.'</a></li><span>        </span>';
+		return '<span>        </span><li class="pure-menu-item"><a class="pure-menu-link pure-button" href="'.$url. $parameters .'"'.$rel.'>'.$page . '</a></li><span>        </span>';
 		
 	}
+
+	/**
+     * Get HTML wrapper for disabled text.
+     *
+     * @param  string  $text
+     * @return string
+     */
+    protected function getDisabledTextWrapper($text)
+    {
+    	// Trang hien tai la trang dau hoac cuoi
+    	// dump($text);
+
+        return '<li class="pure-menu-item"><button class="pure-button pure-button-disabled">'.$text.'</button></li>';
+    }
+
+    /**
+     * Get HTML wrapper for active text.
+     *
+     * @param  string  $text
+     * @return string
+     */
+    protected function getActivePageWrapper($text)
+    {
+    	// Link cho Trang hien tai 
+    	// Page current text
+    	// dump($text);
+
+        return '<li class="pure-menu-item"><button class="pure-button pure-button-disabled">' . $text . '</button></li>';        
+
+    }
 }

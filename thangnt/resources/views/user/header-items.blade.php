@@ -6,7 +6,7 @@
 			<a class="pure-menu-link">
 			
 				{{ \Auth::user()->kana }} ({{ getRoleNameByRoleId(\Auth::user()->role_id) }})
-			
+				
 			</a>
 		</li>
 
